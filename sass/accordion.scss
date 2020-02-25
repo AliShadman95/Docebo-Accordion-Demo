@@ -1,0 +1,80 @@
+$main-accordion-background-color: white;
+
+$verylarge-text-fontsize: 18px;
+$large-text-fontsize: 14px;
+$medium-text-fontsize: 13px;
+$small-text-fontsize: 12px;
+
+$semibold-font-weight: semibold;
+
+$primary-color-1: #333;
+$primary-color-2: #0465ac;
+$primary-color-3: #999;
+
+$panel-title-height: 60px;
+$panel-with-description-height: 70px;
+$panel-no-description-height: 50px;
+$panel-left-padding: 25px;
+$panel-separator-height: 30px;
+
+#my-accordion {
+  background-color: $main-accordion-background-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-title-div {
+  height: $panel-title-height;
+  font-size: $verylarge-text-fontsize;
+  color: $primary-color-1;
+}
+
+hr {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $primary-color-1;
+  opacity: 0.2;
+  margin: 0px;
+}
+
+.panel-div {
+  padding-left: $panel-left-padding;
+}
+
+.panel-with-description {
+  height: $panel-with-description-height;
+}
+
+.panel-title {
+  font-size: $large-text-fontsize;
+  font-weight: $semibold-font-weight;
+  color: $primary-color-2;
+  p {
+    margin: 12px 0px 12px 0px;
+  }
+}
+
+.panel-description {
+  font-size: $small-text-fontsize;
+  font-weight: $semibold-font-weight;
+  color: $primary-color-3;
+}
+
+.panel-content {
+  display: none;
+  overflow: hidden;
+}
+
+.panel-separator {
+  height: $panel-separator-height;
+  background-color: #f1f1f1;
+}
+
+.panel-active {
+  height: 100%;
+
+  .panel-content {
+    padding-bottom: 20px;
+  }
+}
