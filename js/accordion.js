@@ -22,29 +22,35 @@ function Accordion(options) {
     // Creating the div container of the panel
     let panelDiv = document.createElement("div");
 
-    // Creating the title, description and content div with relative paragraph elements of the panel and the divider
+    // Creating the title, description,button and content div with relative paragraph elements of the panel and the divider
     let panelTitleDiv = document.createElement("div");
     let panelDescriptionDiv = document.createElement("div");
     let panelContentDiv = document.createElement("div");
+    let panelButtonDiv = document.createElement("div");
     let panelTitleParagraph = document.createElement("p");
     let panelDescriptionParagraph = document.createElement("p");
     let divider = document.createElement("hr");
 
-    //Setting the title,description and content
+    //Setting the title,description material icon and content
     panelTitleParagraph.innerHTML = panel.title;
     panelDescriptionParagraph.innerHTML = panel.subtitle;
     panelContentDiv.innerHTML += panel.content;
+    panelButtonDiv.innerHTML +=
+      "<i class='material-icons'>keyboard_arrow_down</i >";
 
     // Adding the classes to the panel div, title, description and content
     panelDiv.classList.add("panel-div", "panel-with-description");
     panelTitleDiv.classList.add("panel-title");
+    panelButtonDiv.classList.add("panel-button-div");
     panelDescriptionDiv.classList.add("panel-description");
     panelContentDiv.classList.add("panel-content");
 
-    //Appending the title, description, content to the relative div and then to the panel div
+    //Appending the title, description,button content to the relative div and then to the panel div
     panelTitleDiv.append(panelTitleParagraph);
     panelDescriptionDiv.append(panelDescriptionParagraph);
+    panelDiv.append(panelButtonDiv);
     panelDiv.append(panelTitleDiv);
+
     panelDiv.append(panelDescriptionDiv);
     panelDiv.append(panelContentDiv);
 
@@ -54,10 +60,14 @@ function Accordion(options) {
     index !== options.panels.length - 1 ? accordionDiv.append(divider) : null;
 
     // Adding the event listeners for each panel
-    panelDiv.addEventListener("click", () => {
+    panelButtonDiv.addEventListener("click", () => {
       panelDiv.classList.toggle("panel-active");
 
-      if (panelDiv.lastChild.style.display === "block") {
+      if (panelDiv.lastChild.style.maxHeight) {
+        //Changing the arrow icon
+        panelButtonDiv.innerHTML =
+          "<i class='material-icons'>keyboard_arrow_down</i >";
+
         //Removing the separators divs
         panelDiv.previousSibling.remove();
         panelDiv.nextSibling.remove();
@@ -71,8 +81,12 @@ function Accordion(options) {
           : null;
 
         // Setting the styles
-        panelDiv.lastChild.style.display = "none";
+        panelDiv.lastChild.style.maxHeight = null;
       } else {
+        //Changing the arrow icon
+        panelButtonDiv.innerHTML =
+          "<i class='material-icons'>keyboard_arrow_up</i >";
+
         //Removing the item divider line
         panelDiv.previousSibling.remove();
         panelDiv.nextSibling !== null ? panelDiv.nextSibling.remove() : null;
@@ -86,11 +100,13 @@ function Accordion(options) {
         separatorDiv2.classList.add("panel-separator");
 
         // Inserting the separator divs
+
         accordionDiv.insertBefore(separatorDiv1, panelDiv);
         accordionDiv.insertBefore(separatorDiv2, panelDiv.nextSibling);
 
         //Setting the styles
-        panelDiv.lastChild.style.display = "block";
+        panelDiv.lastChild.style.maxHeight =
+          panelDiv.lastChild.scrollHeight + "px";
       }
     });
   });
